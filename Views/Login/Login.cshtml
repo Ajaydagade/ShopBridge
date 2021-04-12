@@ -1,0 +1,216 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>DACPL-ShopBridge Login</title>
+
+    <!-- Bootstrap -->
+    <link href="~/AppAssets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/AppAssets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/AppAssets/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="~/AppAssets/vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="~/AppAssets/build/css/custom.min.css" rel="stylesheet">
+
+    <style>
+
+        #txtEmail:focus {
+            box-shadow: 0px 0px 6px 0.5px #427bffa3;
+        }
+
+        #txtPassword:focus {
+            box-shadow: 0px 0px 6px 0.5px #427bffa3;
+        }
+
+        .errorFocus {
+            box-shadow: 0px 0px 6px 0.5px #ff5200 !important;
+        }
+    </style>
+</head>
+
+<body class="login">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    <form>
+                        <h1>DACPL-ShopBridge Login</h1>
+                        <div class="row input-group mb-3">
+                            <input type="email" class="form-control" id="txtEmail" placeholder="Username" required="" />
+
+                        </div>
+                        <p style="color:red" id="emptyUser"></p>
+                        @*<div class="input-group mb-3">
+                                <input type="password" id="txtPassword" class="form-control" placeholder="Password" required="" />
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+
+                                        <span class="fa fa-fw fa-eye field-icon toggle-password" toggle="#txtPassword"></span>
+                                    </div>
+                                </div>
+                            </div>*@
+
+                        <div class="row input-group mb-3">
+                            <input type="password" class="form-control" id="txtPassword" maxlength="20" placeholder="Password">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fa fa-fw fa-eye field-icon toggle-password" toggle="#txtPassword"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <p style="color:red" id="emptyPass"></p>
+
+                        <div>
+                            <a class="btn btn-secondary submit" onclick="Validate()">Log in</a>
+                            @*<a class="reset_pass" href="#">Lost your password?</a>*@
+                        </div>
+
+                        <p style="color:red" id="invalid"></p>
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            @*<p class="change_link">
+                                    New to site?
+                                    <a href="#signup" class="to_register"> Create Account </a>
+                                </p>*@
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h1><i class="fa fa-clock-o"></i> ShopBridge</h1>
+                                <p>©2020 All Rights Reserved. DACPL. Privacy and Terms</p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+            <div id="register" class="animate form registration_form">
+                <section class="login_content">
+                    <form>
+                        <h1>Create Account</h1>
+                        <div>
+                            <input type="text" class="form-control" placeholder="Username" required="" />
+                        </div>
+                        <div>
+                            <input type="email" class="form-control" placeholder="Email" required="" />
+                        </div>
+                        <div>
+                            <input type="password" class="form-control" placeholder="Password" required="" />
+                        </div>
+                        <div>
+                            <a class="btn btn-primary submit">Submit</a>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            <p class="change_link">
+                                Already a member ?
+                                <a href="#signin" class="to_register"> Log in </a>
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h1><i class="fa fa-paw"></i>DACPL</h1>
+                                <p>©2020 All Rights Reserved. DACPL. Privacy and Terms</p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- jQuery -->
+
+<script src="~/AppAssets/vendors/jquery/dist/jquery.min.js"></script>
+<script src="~/js/Global.js"></script>
+<script>
+
+
+    document.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+          //  document.getElementById("btnsubmit").click();
+            Validate();
+        }
+    });
+
+
+    function Validate() {
+         var email = $('#txtEmail').val();
+         var pass = $('#txtPassword').val();
+
+         if (email == '' && pass=='' ) {
+              $('#emptyUser').html('Please Enter Email Address');
+              $('#Employee_No').addClass('errorFocus');
+
+              $('#emptyPass').html('Please Enter Password');
+              $('#Employee_Password').addClass('errorFocus');
+          }
+         else if (email == '') {
+             $('#emptyUser').html('Please Enter Email Address');
+              $('#Employee_No').addClass('errorFocus');
+          }
+          else if (pass == '') {
+              $('#emptyPass').html('Please Enter Password');
+              $('#Employee_Password').addClass('errorFocus');
+          }
+          else {
+              $('#emptyUser').html('');
+              $('#emptyPass').html('');
+              $('#invalid').html('');
+              $('#Employee_No').removeClass('errorFocus');
+              $('#Employee_Password').removeClass('errorFocus');
+                $.ajax({
+                  type: "POST",
+                  url: '@Url.Action("Validate", "Login")',
+                  data: {
+                      Email_Address: $('#txtEmail').val(),
+                      Employee_Password: $('#txtPassword').val()
+          },
+          error: function (result) {
+              $('#invalid').html("There is a Problem, Try Again!");
+          },
+          success: function (result) {
+            console.log(result);
+            if (result.status == true) {
+              window.location.href = '@Url.Action("Index", "Home")';
+            }
+            else {
+              //alert(result.message);
+                $('#invalid').html('Invalid Employee Number or Password');
+            }
+          }
+        });
+          }
+
+
+        }
+    $(".toggle-password").click(function () {
+        HideShowPassword('.toggle-password');
+    });
+</script>

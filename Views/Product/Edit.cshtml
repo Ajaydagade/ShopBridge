@@ -1,0 +1,80 @@
+﻿
+ @model ShopBridgeApp.ViewModel.Product.ProductEditViewModel
+
+@{
+
+    Layout = null;
+
+}
+<div class="form-horizontal">
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Prod_Id" />
+        <div class="row">
+            <div class="col-md-12">
+                <label id="lblProdName" class="control-label">Product Name</label>
+                <input asp-for="Name" class="form-control"  maxlength="50"   />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label id="lblDescription" class="control-label">Product Description </label>
+                <input asp-for="Description" maxlength="50" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label id="lblPrice" class="control-label">Price </label>
+                <input asp-for="Price" class="form-control"   maxlength="13" onkeypress="return isNumber(event)" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <label id="lblQty" class="control-label">Qty </label>
+                <input asp-for="Qty" class="form-control"  maxlength="7" onkeypress="return isNumber(event)"/>
+                <span asp-validation-for="Qty" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label id="lblMf_Date" class="control-label">MF Date </label>
+                <input asp-for="Mf_Date" type="date"  class="form-control" />
+                <span asp-validation-for="Mf_Date" class="text-danger"></span>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <label id="lblEx_date" class="control-label">Expire Date </label>
+                <input asp-for="Ex_date"  type="date" class="form-control" />
+                <span asp-validation-for="Ex_date" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" id="btnsubmit" value="Update" class="btn btn-secondary swalDefaultSuccess">
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="~/AppAssets/jquery-validate/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+ 
+
+<script>
+
+
+
+</script>

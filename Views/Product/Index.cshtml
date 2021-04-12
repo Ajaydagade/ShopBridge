@@ -1,0 +1,105 @@
+﻿@model ShopBridgeApp.ViewModel.Product.ProductsListModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Product Configuration";
+}
+<!-- SweetAlert2 -->
+<link href="~/AppAssets/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+
+<style>
+    .btn {
+        padding: 7px 7px !important;
+    }
+</style>
+<hr />
+<div>
+    <h2>Department Configuration</h2>
+</div>
+<div id="DivTbl" style="overflow:scroll;margin-top:50px ">
+    <input type="button" style="float:right" class="btn btn-secondary" id="showModal" value="Add Products" onclick="ShowModal('/Product/Create','Product Configuration')" />
+    <br />
+    <table id="datatable" class="table table-striped table-bordered" style="width:100%;margin-top:15px">
+        <thead>
+            <tr>
+                <th>Sr.No</th>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>MF Date</th>
+                <th>Expire date</th>
+                <th width="60px">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int srNo = 1;}
+            @foreach (var item in Model.ProductView)
+            {
+            <tr>
+                <td>@srNo</td>
+                <td>@item.Name</td> 
+                <td>@item.Description</td>
+                <td>@item.Price</td>
+                <td>@item.Qty</td>
+                <td>@item.Mf_Date.ToString("dd-MM-yyyy")</td>
+                <td>@item.Ex_date.ToString("dd-MM-yyyy")</td>
+                <td>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+
+                            <button type="submit" class="btn btn-secondary" onclick="ShowModal('/Product/Edit?ProductId=@item.Prod_Id','Update Product Configuration')">  <i class="fa fa-pencil" aria-hidden="true" title="Edit"></i></button>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <button class="deletebutton btn btn-danger" type="button" onclick="return CustConfirm('@item.Prod_Id');"> <i class="fa fa-trash" aria-hidden="true" title="Delete"></i></button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+                srNo++;
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/AppAssets/sweetalert2/sweetalert2.min.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+        var table = $('#datatable').DataTable({
+            responsive: true
+        });
+
+        new $.fn.dataTable.FixedHeader(table);
+    });
+     function CustConfirm(empid) {
+            var resp;
+                swal.fire({
+                    title: "Are you sure to Delete This Record?",
+                    type: "error",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, delete it!",
+
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: "Cancel",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }).then((result) => {
+                    if (result.value) {
+                        var id = empid;
+                        resp = true;
+                        window.location.href = '@Url.Action("Delete", "Product")' + '/' + empid;
+                    }
+                    else {
+                        resp = false;
+                    }
+                });
+            return resp;
+        }
+
+
+
+</script>
+
+
